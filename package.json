@@ -1,0 +1,22 @@
+{
+  "name": "serverless-framework-deployment-example",
+  "version": "1.0.0",
+  "description": "Example Serverless Framework project for demonstrating deployment",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlschroedl/serverless-framework-deployment-example.git"
+  },
+  "author": "Carl Schroedl <carlschroedl@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/carlschroedl/serverless-framework-deployment-example/issues"
+  },
+  "homepage": "https://github.com/carlschroedl/serverless-framework-deployment-example#readme",
+  "dependencies": {
+    "serverless": "^2.18.0"
+  }
+}
