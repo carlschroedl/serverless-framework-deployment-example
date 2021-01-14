@@ -1,0 +1,42 @@
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    branches:
+      - master
+
+name: Build master branch, upload to "latest" tag and release
+
+jobs:
+  build:
+    name: Upload Release Asset
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Build
+        run: npm ci && npm run build --if-present && npm test
+      - name: Package Project 
+        # include source code and node_modules. No need to include git info or serverless things -- those don't help deployment
+        run: |
+          zip example.zip * .* --exclude .git .github .serverless
+      - name: Create Tag
+        run: git tag latest
+      - name: Push Tag
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: latest
+          tags:  true
+          force: true
+      - name: Create/Update Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: example.zip
+          asset_name: example.zip
+          tag: latest
+          overwrite: true
