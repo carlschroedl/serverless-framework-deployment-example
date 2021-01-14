@@ -22,7 +22,7 @@ jobs:
       - name: Package Project 
         # include source code and node_modules. No need to include git info or serverless things -- those don't help deployment
         run: |
-          zip example.zip * .* --exclude .git .github .serverless
+          zip example.zip ./ --exclude .git .github .serverless
       - name: Create Tag
         run: git tag latest
       - name: Push Tag
